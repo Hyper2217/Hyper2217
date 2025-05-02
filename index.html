@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CODE PLAYGROUND</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+    }
+    .logo-banner {
+      text-align: center;
+      padding: 1rem;
+      background: #111;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #00fff0;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px #00fff0, 0 0 20px #00fff0;
+    }
+    header {
+      background-color: #1a1a2e;
+      padding: 1rem 2rem;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    nav a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #00fff0;
+      text-shadow: 0 0 5px #00fff0;
+    }
+    .editor-section {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .toggle-buttons button {
+      background: none;
+      border: 2px solid #00fff0;
+      color: #00fff0;
+      margin: 0 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .toggle-buttons button.active, .toggle-buttons button:hover {
+      background: #00fff0;
+      color: #000;
+      box-shadow: 0 0 10px #00fff0;
+    }
+    #codeArea {
+      width: 90%;
+      max-width: 900px;
+      height: 300px;
+      margin: 1rem auto;
+      padding: 1rem;
+      font-family: monospace;
+      font-size: 1rem;
+      background: #1a1a2e;
+      border: 2px solid #00fff0;
+      color: #00fff0;
+      border-radius: 8px;
+      resize: vertical;
+      box-shadow: 0 0 15px #00fff0;
+    }
+    .editor-controls {
+      margin-top: 1rem;
+    }
+    .editor-controls button {
+      margin: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .run-btn { background-color: #00fff0; color: #000; }
+    .clear-btn { background-color: #ff5252; color: white; }
+    .download-btn { background-color: #3f3d56; color: white; }
+    .editor-controls button:hover {
+      opacity: 0.9;
+      box-shadow: 0 0 10px #00fff0;
+    }
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: 2px solid #00fff0;
+      border-radius: 8px;
+      box-shadow: 0 0 15px #00fff0;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-banner">
+    <img src="https://i.ibb.co/Kjtp0JMK/file-00000000a90461f7a71597bd3a9b0c57.png" alt="TOOFAN logo" width="150" heigth="150"</a>
+  </div>
+  <header>
+    <h1>CODE PLAYGROUND</h1>
+    <nav>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="editor-section">
+      <div class="toggle-buttons">
+        <button class="active" onclick="switchTab('html')">HTML</button>
+        <button onclick="switchTab('css')">CSS</button>
+        <button onclick="switchTab('js')">JavaScript</button>
+      </div>
+      <textarea id="codeArea" placeholder="Start typing your code..."></textarea>
+      <div class="editor-controls">
+        <button class="run-btn" onclick="updatePreview()">Run Code</button>
+        <button class="clear-btn" onclick="clearEditors()">Clear All</button>
+        <button class="download-btn" onclick="downloadCode()">Download Code</button>
+      </div>
+    </section>
+
+    <section class="preview">
+      <h2 style="text-align:center; color:#00fff0;">Live Preview</h2>
+      <iframe id="preview"></iframe>
+    </section>
+    <section class="description" style="text-align:center; margin: 2rem auto; width: 90%; max-width: 900px; color: #ccc;">
+  <h2 style="color: #00fff0;">How to Use the Code Playground</h2>
+  <p>Select between HTML, CSS, and JavaScript tabs to write code in each section. Click <strong>"Run Code"</strong> to preview your output live, <strong>"Clear All"</strong> to reset, or <strong>"Download Code"</strong> to save your project as an HTML file.</p>
+</section>
+
+<section class="about" id="about" style="text-align:center; margin: 2rem auto; width: 90%; max-width: 900px; color: #ccc;">
+  <h2 style="color: #00fff0;">About TOOFAN.com</h2>
+  <p>TOOFAN.com is your go-to platform for experimenting, learning, and building with HTML, CSS, and JavaScript in one beautiful techy space. We empower future creators with hands-on tools and real-time previews.</p>
+</section>
+
+<section class="contact" id="contact" style="text-align:center; margin: 2rem auto; width: 90%; max-width: 900px; color: #ccc;">
+  <h2 style="color: #00fff0;">Contact the Developer</h2>
+  <p>
+    <a href="tel:+254754247413" style="margin:0 10px;">
+      <svg width="24" height="24" fill="#00fff0" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.06-.21 11.36 11.36 0 003.55.57 1 1 0 011 1v3.49a1 1 0 01-1 1A17.91 17.91 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.55 1 1 0 01-.21 1.06z"/></svg>
+    </a>
+    <a href="mailto:kombobakari610@gmail.com" style="margin:0 10px;">
+      <svg width="24" height="24" fill="#00fff0" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 2v.511l-8 5.333-8-5.333V6h16zm0 12H4V8.5l8 5.333 8-5.333V18z"/></svg>
+    </a>
+    <a href="https://instagram.com/toofan_2217" target="_blank" style="margin:0 10px;">
+      <svg width="24" height="24" fill="#00fff0" viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm5 3c-2.206 0-4 1.794-4 4s1.794 4 4 4a4 4 0 100-8zm0 2a2 2 0 110 4 2 2 0 010-4zm4.5-2a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/></svg>
+    </a>
+    <a href="https://x.com/toofan2217" target="_blank" style="margin:0 10px;">
+      <svg width="24" height="24" fill="#00fff0" viewBox="0 0 24 24"><path d="M20.165 3h-3.455l-4.334 5.72-4.7-5.72H3.664l6.525 7.908L3 21h3.49l4.655-6.133 5.05 6.133h3.803l-6.935-8.483L20.165 3z"/></svg>
+    </a>
+  </p>
+</section>
+
+<section class="socials" style="text-align:center; margin-top:2rem;">
+  <a href="https://instagram.com/toofan_2217" target="_blank" style="margin: 0 10px;">
+    <svg width="30" height="30" fill="#00fff0" viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm5 3c-2.206 0-4 1.794-4 4s1.794 4 4 4a4 4 0 100-8zm0 2a2 2 0 110 4 2 2 0 010-4zm4.5-2a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/></svg>
+  </a>
+  <a href="https://x.com/toofan2217" target="_blank" style="margin: 0 10px;">
+    <svg width="30" height="30" fill="#00fff0" viewBox="0 0 24 24"><path d="M20.165 3h-3.455l-4.334 5.72-4.7-5.72H3.664l6.525 7.908L3 21h3.49l4.655-6.133 5.05 6.133h3.803l-6.935-8.483L20.165 3z"/></svg>
+  </a>
+  <a href="https://www.buymeacoffee.com/" target="_blank" style="margin: 0 10px;">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" style="height:40px; border-radius:6px;">
+  </a>
+</section>
+    <footer style="background:#111; color:#00fff0; text-align:center; padding:1rem; margin-top:2rem; box-shadow: 0 -4px 15px rgba(0,0,0,0.3);">
+  <p>&copy; 2025 TOOFAN.com. All rights reserved.</p>
+</footer>
+  </main>
+
+  <script>
+    let currentTab = 'html';
+    const editors = { html: '', css: '', js: '' };
+    const codeArea = document.getElementById('codeArea');
+    const buttons = document.querySelectorAll('.toggle-buttons button');
+
+    function switchTab(tab) {
+      editors[currentTab] = codeArea.value;
+      currentTab = tab;
+      codeArea.value = editors[tab];
+      buttons.forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`.toggle-buttons button[onclick*="${tab}"]`).classList.add('active');
+    }
+
+    function updatePreview() {
+      editors[currentTab] = codeArea.value;
+      const html = editors.html || '';
+      const css = `<style>${editors.css || ''}</style>`;
+      const js = `<script>${editors.js || ''}<\/script>`;
+      const preview = document.getElementById('preview');
+      const doc = preview.contentDocument || preview.contentWindow.document;
+      doc.open();
+      doc.write(html + css + js);
+      doc.close();
+    }
+
+    function clearEditors() {
+      for (let key in editors) editors[key] = '';
+      codeArea.value = '';
+      updatePreview();
+    }
+
+    function downloadCode() {
+      editors[currentTab] = codeArea.value;
+      const finalHTML = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Downloaded Project</title>
+  <style>${editors.css}</style>
+</head>
+<body>
+  ${editors.html}
+  <script>${editors.js}<\/script>
+</body>
+</html>`;
+      const blob = new Blob([finalHTML], { type: 'text/html' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'toofan-project.html';
+      a.click();
+    }
+  </script>
+</body>
+</html>
